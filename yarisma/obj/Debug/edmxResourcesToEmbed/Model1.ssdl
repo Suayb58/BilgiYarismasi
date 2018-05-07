@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bilgiYarismasiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Karakter">
+    <Key>
+      <PropertyRef Name="karakterId" />
+    </Key>
+    <Property Name="karakterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="level" Type="int" />
+    <Property Name="yasamSuresi" Type="int" />
+    <Property Name="harcananSure" Type="int" />
+    <Property Name="dogruSayisi" Type="int" />
+    <Property Name="toplamSoruSayisi" Type="int" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="kategoriId" />
+    </Key>
+    <Property Name="kategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kategoriAdi" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="kullaniciId" />
+    </Key>
+    <Property Name="kullaniciId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sifre" Type="nvarchar" MaxLength="50" />
+    <Property Name="kullaniciAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="durum" Type="int" />
+    <Property Name="karakterId" Type="int" />
+  </EntityType>
+  <EntityType Name="Soru">
+    <Key>
+      <PropertyRef Name="soruId" />
+    </Key>
+    <Property Name="soruId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kategoriId" Type="int" />
+    <Property Name="cevap" Type="nvarchar" MaxLength="50" />
+    <Property Name="soruIcerik" Type="nvarchar" MaxLength="50" />
+    <Property Name="secenekA" Type="nvarchar" MaxLength="50" />
+    <Property Name="secenekB" Type="nvarchar" MaxLength="50" />
+    <Property Name="secenekC" Type="nvarchar" MaxLength="50" />
+    <Property Name="secenekD" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Kullanici_ToKarakter">
+    <End Role="Karakter" Type="Self.Karakter" Multiplicity="0..1" />
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Karakter">
+        <PropertyRef Name="karakterId" />
+      </Principal>
+      <Dependent Role="Kullanici">
+        <PropertyRef Name="karakterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Soru_ToKategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+    <End Role="Soru" Type="Self.Soru" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="kategoriId" />
+      </Principal>
+      <Dependent Role="Soru">
+        <PropertyRef Name="kategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bilgiYarismasiModelStoreContainer">
+    <EntitySet Name="Karakter" EntityType="Self.Karakter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Soru" EntityType="Self.Soru" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Kullanici_ToKarakter" Association="Self.FK_Kullanici_ToKarakter">
+      <End Role="Karakter" EntitySet="Karakter" />
+      <End Role="Kullanici" EntitySet="Kullanici" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Soru_ToKategori" Association="Self.FK_Soru_ToKategori">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Soru" EntitySet="Soru" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

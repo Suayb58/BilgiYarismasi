@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bilgiYarismasiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Karakter">
+    <Key>
+      <PropertyRef Name="karakterId" />
+    </Key>
+    <Property Name="karakterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="level" Type="Int32" />
+    <Property Name="yasamSuresi" Type="Int32" />
+    <Property Name="harcananSure" Type="Int32" />
+    <Property Name="dogruSayisi" Type="Int32" />
+    <Property Name="toplamSoruSayisi" Type="Int32" />
+    <NavigationProperty Name="Kullanicis" Relationship="Self.FK_Kullanici_ToKarakter" FromRole="Karakter" ToRole="Kullanici" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="kategoriId" />
+    </Key>
+    <Property Name="kategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kategoriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Sorus" Relationship="Self.FK_Soru_ToKategori" FromRole="Kategori" ToRole="Soru" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="kullaniciId" />
+    </Key>
+    <Property Name="kullaniciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="kullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="durum" Type="Int32" />
+    <Property Name="karakterId" Type="Int32" />
+    <NavigationProperty Name="Karakter" Relationship="Self.FK_Kullanici_ToKarakter" FromRole="Kullanici" ToRole="Karakter" />
+  </EntityType>
+  <EntityType Name="Soru">
+    <Key>
+      <PropertyRef Name="soruId" />
+    </Key>
+    <Property Name="soruId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kategoriId" Type="Int32" />
+    <Property Name="cevap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="soruIcerik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="secenekA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="secenekB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="secenekC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="secenekD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kategori" Relationship="Self.FK_Soru_ToKategori" FromRole="Soru" ToRole="Kategori" />
+  </EntityType>
+  <Association Name="FK_Kullanici_ToKarakter">
+    <End Role="Karakter" Type="Self.Karakter" Multiplicity="0..1" />
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Karakter">
+        <PropertyRef Name="karakterId" />
+      </Principal>
+      <Dependent Role="Kullanici">
+        <PropertyRef Name="karakterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Soru_ToKategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+    <End Role="Soru" Type="Self.Soru" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="kategoriId" />
+      </Principal>
+      <Dependent Role="Soru">
+        <PropertyRef Name="kategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bilgiYarismasiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Karakters" EntityType="Self.Karakter" />
+    <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+    <EntitySet Name="Kullanicis" EntityType="Self.Kullanici" />
+    <EntitySet Name="Sorus" EntityType="Self.Soru" />
+    <AssociationSet Name="FK_Kullanici_ToKarakter" Association="Self.FK_Kullanici_ToKarakter">
+      <End Role="Karakter" EntitySet="Karakters" />
+      <End Role="Kullanici" EntitySet="Kullanicis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Soru_ToKategori" Association="Self.FK_Soru_ToKategori">
+      <End Role="Kategori" EntitySet="Kategoris" />
+      <End Role="Soru" EntitySet="Sorus" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

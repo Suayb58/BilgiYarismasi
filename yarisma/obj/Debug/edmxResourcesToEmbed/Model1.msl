@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bilgiYarismasiModelStoreContainer" CdmEntityContainer="bilgiYarismasiEntities">
+    <EntitySetMapping Name="Karakters">
+      <EntityTypeMapping TypeName="bilgiYarismasiModel.Karakter">
+        <MappingFragment StoreEntitySet="Karakter">
+          <ScalarProperty Name="karakterId" ColumnName="karakterId" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="yasamSuresi" ColumnName="yasamSuresi" />
+          <ScalarProperty Name="harcananSure" ColumnName="harcananSure" />
+          <ScalarProperty Name="dogruSayisi" ColumnName="dogruSayisi" />
+          <ScalarProperty Name="toplamSoruSayisi" ColumnName="toplamSoruSayisi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategoris">
+      <EntityTypeMapping TypeName="bilgiYarismasiModel.Kategori">
+        <MappingFragment StoreEntitySet="Kategori">
+          <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+          <ScalarProperty Name="kategoriAdi" ColumnName="kategoriAdi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanicis">
+      <EntityTypeMapping TypeName="bilgiYarismasiModel.Kullanici">
+        <MappingFragment StoreEntitySet="Kullanici">
+          <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="durum" ColumnName="durum" />
+          <ScalarProperty Name="karakterId" ColumnName="karakterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sorus">
+      <EntityTypeMapping TypeName="bilgiYarismasiModel.Soru">
+        <MappingFragment StoreEntitySet="Soru">
+          <ScalarProperty Name="soruId" ColumnName="soruId" />
+          <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+          <ScalarProperty Name="cevap" ColumnName="cevap" />
+          <ScalarProperty Name="soruIcerik" ColumnName="soruIcerik" />
+          <ScalarProperty Name="secenekA" ColumnName="secenekA" />
+          <ScalarProperty Name="secenekB" ColumnName="secenekB" />
+          <ScalarProperty Name="secenekC" ColumnName="secenekC" />
+          <ScalarProperty Name="secenekD" ColumnName="secenekD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

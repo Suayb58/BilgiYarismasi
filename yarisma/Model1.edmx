@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bilgiYarismasiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Karakter">
+          <Key>
+            <PropertyRef Name="karakterId" />
+          </Key>
+          <Property Name="karakterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="level" Type="int" />
+          <Property Name="yasamSuresi" Type="int" />
+          <Property Name="harcananSure" Type="int" />
+          <Property Name="dogruSayisi" Type="int" />
+          <Property Name="toplamSoruSayisi" Type="int" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="kategoriId" />
+          </Key>
+          <Property Name="kategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="kullaniciId" />
+          </Key>
+          <Property Name="kullaniciId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sifre" Type="nvarchar" MaxLength="50" />
+          <Property Name="kullaniciAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="durum" Type="int" />
+          <Property Name="karakterId" Type="int" />
+        </EntityType>
+        <EntityType Name="Soru">
+          <Key>
+            <PropertyRef Name="soruId" />
+          </Key>
+          <Property Name="soruId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriId" Type="int" />
+          <Property Name="cevap" Type="nvarchar" MaxLength="50" />
+          <Property Name="soruIcerik" Type="nvarchar" MaxLength="50" />
+          <Property Name="secenekA" Type="nvarchar" MaxLength="50" />
+          <Property Name="secenekB" Type="nvarchar" MaxLength="50" />
+          <Property Name="secenekC" Type="nvarchar" MaxLength="50" />
+          <Property Name="secenekD" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Kullanici_ToKarakter">
+          <End Role="Karakter" Type="Self.Karakter" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Karakter">
+              <PropertyRef Name="karakterId" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="karakterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soru_ToKategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Soru" Type="Self.Soru" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriId" />
+            </Principal>
+            <Dependent Role="Soru">
+              <PropertyRef Name="kategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bilgiYarismasiModelStoreContainer">
+          <EntitySet Name="Karakter" EntityType="Self.Karakter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Soru" EntityType="Self.Soru" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Kullanici_ToKarakter" Association="Self.FK_Kullanici_ToKarakter">
+            <End Role="Karakter" EntitySet="Karakter" />
+            <End Role="Kullanici" EntitySet="Kullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soru_ToKategori" Association="Self.FK_Soru_ToKategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Soru" EntitySet="Soru" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bilgiYarismasiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Karakter">
+          <Key>
+            <PropertyRef Name="karakterId" />
+          </Key>
+          <Property Name="karakterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="level" Type="Int32" />
+          <Property Name="yasamSuresi" Type="Int32" />
+          <Property Name="harcananSure" Type="Int32" />
+          <Property Name="dogruSayisi" Type="Int32" />
+          <Property Name="toplamSoruSayisi" Type="Int32" />
+          <NavigationProperty Name="Kullanicis" Relationship="Self.FK_Kullanici_ToKarakter" FromRole="Karakter" ToRole="Kullanici" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="kategoriId" />
+          </Key>
+          <Property Name="kategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sorus" Relationship="Self.FK_Soru_ToKategori" FromRole="Kategori" ToRole="Soru" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="kullaniciId" />
+          </Key>
+          <Property Name="kullaniciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="durum" Type="Int32" />
+          <Property Name="karakterId" Type="Int32" />
+          <NavigationProperty Name="Karakter" Relationship="Self.FK_Kullanici_ToKarakter" FromRole="Kullanici" ToRole="Karakter" />
+        </EntityType>
+        <EntityType Name="Soru">
+          <Key>
+            <PropertyRef Name="soruId" />
+          </Key>
+          <Property Name="soruId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriId" Type="Int32" />
+          <Property Name="cevap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="soruIcerik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secenekA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secenekB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secenekC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secenekD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_Soru_ToKategori" FromRole="Soru" ToRole="Kategori" />
+        </EntityType>
+        <Association Name="FK_Kullanici_ToKarakter">
+          <End Role="Karakter" Type="Self.Karakter" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Karakter">
+              <PropertyRef Name="karakterId" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="karakterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soru_ToKategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Soru" Type="Self.Soru" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriId" />
+            </Principal>
+            <Dependent Role="Soru">
+              <PropertyRef Name="kategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bilgiYarismasiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Karakters" EntityType="Self.Karakter" />
+          <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+          <EntitySet Name="Kullanicis" EntityType="Self.Kullanici" />
+          <EntitySet Name="Sorus" EntityType="Self.Soru" />
+          <AssociationSet Name="FK_Kullanici_ToKarakter" Association="Self.FK_Kullanici_ToKarakter">
+            <End Role="Karakter" EntitySet="Karakters" />
+            <End Role="Kullanici" EntitySet="Kullanicis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soru_ToKategori" Association="Self.FK_Soru_ToKategori">
+            <End Role="Kategori" EntitySet="Kategoris" />
+            <End Role="Soru" EntitySet="Sorus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bilgiYarismasiModelStoreContainer" CdmEntityContainer="bilgiYarismasiEntities">
+          <EntitySetMapping Name="Karakters">
+            <EntityTypeMapping TypeName="bilgiYarismasiModel.Karakter">
+              <MappingFragment StoreEntitySet="Karakter">
+                <ScalarProperty Name="karakterId" ColumnName="karakterId" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="yasamSuresi" ColumnName="yasamSuresi" />
+                <ScalarProperty Name="harcananSure" ColumnName="harcananSure" />
+                <ScalarProperty Name="dogruSayisi" ColumnName="dogruSayisi" />
+                <ScalarProperty Name="toplamSoruSayisi" ColumnName="toplamSoruSayisi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoris">
+            <EntityTypeMapping TypeName="bilgiYarismasiModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+                <ScalarProperty Name="kategoriAdi" ColumnName="kategoriAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicis">
+            <EntityTypeMapping TypeName="bilgiYarismasiModel.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="karakterId" ColumnName="karakterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sorus">
+            <EntityTypeMapping TypeName="bilgiYarismasiModel.Soru">
+              <MappingFragment StoreEntitySet="Soru">
+                <ScalarProperty Name="soruId" ColumnName="soruId" />
+                <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+                <ScalarProperty Name="cevap" ColumnName="cevap" />
+                <ScalarProperty Name="soruIcerik" ColumnName="soruIcerik" />
+                <ScalarProperty Name="secenekA" ColumnName="secenekA" />
+                <ScalarProperty Name="secenekB" ColumnName="secenekB" />
+                <ScalarProperty Name="secenekC" ColumnName="secenekC" />
+                <ScalarProperty Name="secenekD" ColumnName="secenekD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

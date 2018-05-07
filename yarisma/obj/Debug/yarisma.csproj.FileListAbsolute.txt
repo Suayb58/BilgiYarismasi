@@ -1,0 +1,13 @@
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\bin\Debug\yarisma.exe.config
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\bin\Debug\yarisma.exe
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\bin\Debug\yarisma.pdb
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\bin\Debug\EntityFramework.dll
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\bin\Debug\EntityFramework.xml
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\obj\Debug\yarisma.csprojResolveAssemblyReference.cache
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\obj\Debug\yarisma.Form1.resources
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\obj\Debug\yarisma.Properties.Resources.resources
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\obj\Debug\yarisma.csproj.GenerateResource.Cache
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\obj\Debug\yarisma.exe
+c:\users\suayb\documents\visual studio 2017\Projects\yarisma\yarisma\obj\Debug\yarisma.pdb
