@@ -1,1 +1,1 @@
-# BilgiYarismasi
+# BilgiYarismasi Projesi
